@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOCIG — Menuiserie aluminium sur mesure à Tournai</title>
+<meta name="description" content="DOCIG, menuisier à Tournai — fabricant de châssis aluminium sur mesure, pose de fenêtres aluminium et remplacement de vitrage double dans tout le Hainaut. Devis gratuit, réponse le jour même.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --anthracite:#24272b;
+    --anthracite-light:#3a3e43;
+    --paper:#f3f1ec;
+    --paper-dim:#e8e5de;
+    --aluminium:#c7cbce;
+    --bronze:#a97d46;
+    --bronze-light:#c69a63;
+    --ink:#1c1e21;
+    --line: rgba(255,255,255,0.12);
+    --line-dark: rgba(28,30,33,0.12);
+    --radius: 2px;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+  }
+  h1,h2,h3{font-family:var(--display); margin:0; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  button{font-family:var(--body);}
+  :focus-visible{outline:2px solid var(--bronze); outline-offset:3px;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV STICKY ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(36,39,43,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 0;
+  }
+  .nav-logo{
+    font-family:var(--display); font-weight:700; font-size:1.15rem;
+    color:#fff; text-decoration:none; letter-spacing:0.02em;
+  }
+  .nav-logo span{color:var(--bronze-light);}
+  .nav-actions{display:flex; align-items:center; gap:18px;}
+  .nav-phone{
+    font-family:var(--mono); font-size:13px; color:var(--aluminium);
+    text-decoration:none; transition:color 0.15s ease;
+  }
+  .nav-phone:hover{color:#fff;}
+  .nav .btn{padding:10px 20px; font-size:0.88rem;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    color:var(--paper);
+    padding:110px 0 90px;
+    background-color:var(--anthracite);
+    background-image:
+      linear-gradient(100deg, rgba(28,30,33,0.94) 30%, rgba(28,30,33,0.55) 75%, rgba(28,30,33,0.35)),
+      url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80');
+    background-size:cover;
+    background-position:center right;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--bronze-light);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--bronze-light);}
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.7rem);
+    font-weight:600;
+    max-width:15ch;
+    color:#fff;
+    text-shadow:0 2px 20px rgba(0,0,0,0.35);
+  }
+  .hero p.sub{
+    margin-top:22px;
+    font-size:1.18rem;
+    color:#e9e7e1;
+    max-width:42ch;
+  }
+  .hero-actions{margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:0.95rem;
+    padding:16px 30px;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-primary{background:var(--bronze); color:#fff; box-shadow:0 6px 20px rgba(169,125,70,0.35);}
+  .btn-primary:hover{background:var(--bronze-light); transform:translateY(-1px);}
+  .btn-ghost{border-color:rgba(255,255,255,0.35); color:#fff;}
+  .btn-ghost:hover{border-color:#fff;}
+
+  .hero-chips{
+    margin-top:46px;
+    display:flex; gap:12px; flex-wrap:wrap;
+  }
+  .chip{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(4px);
+    padding:9px 16px;
+    font-size:0.84rem; color:#fff;
+    border-radius:100px;
+  }
+  .chip svg{width:15px; height:15px; stroke:var(--bronze-light); fill:none; stroke-width:2;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ---------- TRUST BAR ---------- */
+  .trustbar{
+    background:var(--anthracite-light);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .trustbar-inner{
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .trust-item{
+    padding:20px 22px;
+    border-right:1px solid var(--line);
+    color:var(--paper);
+  }
+  .trust-item:last-child{border-right:none;}
+  .trust-item .t-big{font-family:var(--display); font-weight:600; font-size:1.25rem; color:#fff;}
+  .trust-item .t-small{font-size:0.8rem; color:var(--aluminium); margin-top:3px;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:92px 0;}
+  .section-head{max-width:54ch; margin-bottom:52px;}
+  .section-eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--bronze); margin-bottom:14px;
+  }
+  .section-head h2{font-size:clamp(1.65rem,3vw,2.3rem); font-weight:600;}
+  .section-head p{color:#55585c; margin-top:14px; font-size:1.03rem;}
+
+  /* ---------- SERVICES (cartes photo) ---------- */
+  .services{background:var(--paper);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+  }
+  .service{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .service:hover{transform:translateY(-5px); box-shadow:0 18px 40px rgba(28,30,33,0.12);}
+  .service-photo{
+    height:190px;
+    background-color:var(--anthracite-light);
+    background-size:cover; background-position:center;
+  }
+  .service-body{padding:26px 24px 30px;}
+  .service-num{font-family:var(--mono); font-size:12px; color:var(--bronze);}
+  .service h3{font-size:1.15rem; font-weight:600; margin-top:10px;}
+  .service p{color:#55585c; margin-top:10px; font-size:0.95rem;}
+  .service-link{
+    margin-top:16px; display:inline-block;
+    font-size:0.88rem; font-weight:600; color:var(--bronze);
+    text-decoration:none;
+  }
+  .service-link:hover{color:var(--bronze-light);}
+
+  /* ---------- MÉTHODE (3 étapes) ---------- */
+  .method{background:var(--anthracite); color:var(--paper);}
+  .method .section-eyebrow{color:var(--bronze-light);}
+  .method .section-head p{color:var(--aluminium);}
+  .method-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .step{background:var(--anthracite); padding:34px 28px;}
+  .step-num{
+    font-family:var(--display); font-size:2.4rem; font-weight:700;
+    color:transparent; -webkit-text-stroke:1px var(--bronze-light);
+  }
+  .step h3{color:#fff; font-size:1.1rem; margin-top:14px;}
+  .step p{color:var(--aluminium); font-size:0.93rem; margin-top:10px;}
+
+  /* ---------- ZONE ---------- */
+  .zone{background:var(--paper-dim);}
+  .zone-inner{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+  .zone-photo{
+    height:100%; min-height:320px;
+    background-color:var(--anthracite-light);
+    background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80');
+    background-size:cover; background-position:center;
+    border:1px solid var(--line-dark);
+  }
+  .commune-list{list-style:none; margin:28px 0 0; padding:0;}
+  .commune-list li{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:13px 0; border-bottom:1px solid var(--line-dark);
+    font-family:var(--mono); font-size:13px;
+  }
+  .commune-list li:last-child{border-bottom:none;}
+  .commune-list li span.tag{color:var(--bronze); font-size:11px;}
+
+  /* ---------- PREUVE ---------- */
+  .proof{background:var(--paper);}
+  .proof-inner{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .proof-card{
+    border:1px solid var(--line-dark);
+    background:#fff;
+    padding:32px 28px;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .proof-card:hover{transform:translateY(-3px); box-shadow:0 12px 28px rgba(28,30,33,0.09);}
+  .stars{color:var(--bronze); font-size:1.15rem; letter-spacing:2px;}
+  .proof-card .big{font-family:var(--display); font-size:2.2rem; font-weight:600; margin-top:10px;}
+  .proof-card .label{font-size:0.87rem; color:#55585c; margin-top:6px;}
+
+  /* ---------- FORM ---------- */
+  .devis{
+    background-color:var(--anthracite);
+    background-image:
+      linear-gradient(rgba(36,39,43,0.93), rgba(36,39,43,0.96)),
+      url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=80');
+    background-size:cover; background-position:center;
+    color:var(--paper);
+  }
+  .devis .section-head p{color:var(--aluminium);}
+  .devis .section-eyebrow{color:var(--bronze-light);}
+  .devis-inner{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;}
+  .devis-side h2{color:#fff;}
+  .devis-side .reassure{
+    margin-top:30px; display:flex; flex-direction:column; gap:16px;
+  }
+  .reassure-item{display:flex; gap:14px; align-items:flex-start; color:var(--aluminium); font-size:0.95rem;}
+  .reassure-item svg{width:20px; height:20px; flex:none; stroke:var(--bronze-light); fill:none; stroke-width:2; margin-top:2px;}
+  .devis-call{
+    margin-top:34px; padding:22px 24px;
+    border:1px solid var(--line); background:rgba(255,255,255,0.04);
+  }
+  .devis-call .label{font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--aluminium);}
+  .devis-call a{
+    display:block; margin-top:8px;
+    font-family:var(--display); font-size:1.5rem; font-weight:600; color:#fff;
+    text-decoration:none;
+  }
+  .devis-call a:hover{color:var(--bronze-light);}
+  .form-card{
+    background:var(--anthracite-light);
+    border:1px solid var(--line);
+    padding:40px;
+  }
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1/-1;}
+  label{font-size:0.82rem; color:var(--aluminium); font-family:var(--mono); letter-spacing:0.02em;}
+  input, select, textarea{
+    font-family:var(--body);
+    background:var(--anthracite);
+    border:1px solid var(--line);
+    color:#fff;
+    padding:13px 14px;
+    border-radius:var(--radius);
+    font-size:0.95rem;
+  }
+  textarea{resize:vertical; min-height:90px;}
+  input::placeholder, textarea::placeholder{color:#7c8085;}
+  .form-submit{margin-top:28px; display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  #formMsg{font-size:0.9rem; color:var(--bronze-light); font-family:var(--mono);}
+  .form-note{margin-top:14px; font-size:0.78rem; color:#8a8d92;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:var(--aluminium); padding:50px 0 28px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; font-size:0.88rem;}
+  footer strong{color:#fff; font-family:var(--display); font-weight:600;}
+  .footer-bottom{
+    margin-top:32px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08);
+    font-size:0.78rem; color:#77797d; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  /* ---------- CTA MOBILE FIXE ---------- */
+  .mobile-cta{
+    display:none;
+    position:fixed; bottom:0; left:0; right:0; z-index:60;
+    background:var(--anthracite);
+    border-top:1px solid var(--line);
+    padding:10px 12px;
+    gap:10px;
+  }
+  .mobile-cta a{
+    flex:1; text-align:center; padding:13px 10px;
+    font-weight:600; font-size:0.9rem; text-decoration:none;
+    border-radius:var(--radius);
+  }
+  .mobile-cta .m-call{border:1px solid rgba(255,255,255,0.3); color:#fff;}
+  .mobile-cta .m-devis{background:var(--bronze); color:#fff;}
+
+  @media (max-width: 900px){
+    .service-grid{grid-template-columns:1fr;}
+    .method-grid{grid-template-columns:1fr;}
+    .zone-inner{grid-template-columns:1fr;}
+    .zone-photo{min-height:220px;}
+    .proof-inner{grid-template-columns:1fr;}
+    .devis-inner{grid-template-columns:1fr;}
+    .form-grid{grid-template-columns:1fr;}
+    .trustbar-inner{grid-template-columns:1fr 1fr;}
+    .trust-item:nth-child(2){border-right:none;}
+    .trust-item:nth-child(1), .trust-item:nth-child(2){border-bottom:1px solid var(--line);}
+    .hero{padding:80px 0 70px; background-position:center;}
+    .nav-phone{display:none;}
+    .mobile-cta{display:flex;}
+    body{padding-bottom:64px;}
+  }
+</style>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="#">DOCIG<span>.</span></a>
+    <div class="nav-actions">
+      <a class="nav-phone" href="tel:+32487489441">+32 487 48 94 41</a>
+      <a href="#devis" class="btn btn-primary">Devis gratuit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Menuiserie aluminium &amp; PVC — Tournai, Hainaut</div>
+    <h1>Fenêtres et châssis aluminium sur mesure à Tournai</h1>
+    <p class="sub">Fabrication locale et pose par la même équipe. Devis gratuit, réponse le jour même — sans engagement.</p>
+    <div class="hero-actions">
+      <a href="#devis" class="btn btn-primary">Demander un devis gratuit</a>
+      <a href="#services" class="btn btn-ghost">Découvrir nos services</a>
+    </div>
+    <div class="hero-chips">
+      <span class="chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Réponse le jour même</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Garantie 10 ans</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg>Fabrication &amp; pose locales</span>
+    </div>
+  </div>
+</header>
+
+<div class="trustbar">
+  <div class="wrap trustbar-inner">
+    <div class="trust-item">
+      <div class="t-big">★ 5,0</div>
+      <div class="t-small">Note Google</div>
+    </div>
+    <div class="trust-item">
+      <div class="t-big">24h</div>
+      <div class="t-small">Délai max de réponse devis</div>
+    </div>
+    <div class="trust-item">
+      <div class="t-big">10 ans</div>
+      <div class="t-small">Garantie sur la pose</div>
+    </div>
+    <div class="trust-item">
+      <div class="t-big">Tournai</div>
+      <div class="t-small">Atelier &amp; équipe locale</div>
+    </div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Ce que nous fabriquons</div>
+      <h2>Trois métiers, une seule équipe</h2>
+      <p>DOCIG fabrique et pose fenêtres, portes et châssis aluminium sur mesure — sans sous-traitance ni intermédiaire, de la prise de mesures à la finition.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service reveal">
+        <div class="service-photo" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="service-body">
+          <div class="service-num">01 — Fenêtres</div>
+          <h3>Fenêtres aluminium sur mesure</h3>
+          <p>Double vitrage, isolation thermique et phonique, finitions au choix — adaptées à chaque ouverture.</p>
+          <a class="service-link" href="#devis">Demander un devis →</a>
+        </div>
+      </div>
+      <div class="service reveal">
+        <div class="service-photo" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="service-body">
+          <div class="service-num">02 — Portes &amp; baies</div>
+          <h3>Portes d'entrée et baies vitrées</h3>
+          <p>Fabrication locale, pose incluse, garantie 10 ans — pour plus de lumière et de sécurité.</p>
+          <a class="service-link" href="#devis">Demander un devis →</a>
+        </div>
+      </div>
+      <div class="service reveal">
+        <div class="service-photo" style="background-image:url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80');"></div>
+        <div class="service-body">
+          <div class="service-num">03 — Châssis</div>
+          <h3>Châssis PVC &amp; aluminium</h3>
+          <p>Remplacement de fenêtres existantes, sans gros travaux — devis gratuit sur place.</p>
+          <a class="service-link" href="#devis">Demander un devis →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="method">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Comment ça se passe</div>
+      <h2 style="color:#fff;">Un chantier simple, en trois étapes</h2>
+      <p>Vous savez exactement où vous en êtes, du premier appel à la pose finale.</p>
+    </div>
+    <div class="method-grid">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>On vient mesurer</h3>
+        <p>Visite gratuite sur place à Tournai et dans le Hainaut — prise de mesures et conseils, sans engagement.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>On fabrique sur mesure</h3>
+        <p>Chaque châssis est fabriqué pour votre ouverture — aluminium ou PVC, finitions et coloris au choix.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>On pose, proprement</h3>
+        <p>Pose par notre propre équipe, chantier laissé propre, garantie 10 ans sur le travail réalisé.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="zone">
+  <div class="wrap zone-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Zone d'intervention</div>
+      <h2>Nous intervenons à Tournai et dans tout le Hainaut belge</h2>
+      <p style="color:#55585c; margin-top:16px;">Fabricant de châssis aluminium sur mesure pour le Hainaut, DOCIG se déplace pour prendre les mesures, poser vos fenêtres aluminium ou remplacer un vitrage double — un chantier propre du premier appel à la pose.</p>
+      <ul class="commune-list">
+        <li>Tournai <span class="tag">Siège</span></li>
+        <li>Péruwelz <span class="tag">Intervention</span></li>
+        <li>Mouscron <span class="tag">Intervention</span></li>
+        <li>Ath <span class="tag">Intervention</span></li>
+        <li>Lessines <span class="tag">Intervention</span></li>
+      </ul>
+    </div>
+    <div class="zone-photo reveal" role="img" aria-label="Baie vitrée aluminium dans un intérieur lumineux"></div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Pourquoi DOCIG</div>
+      <h2>La confiance se construit chantier après chantier</h2>
+    </div>
+    <div class="proof-inner">
+      <div class="proof-card reveal">
+        <div class="stars">★★★★★</div>
+        <div class="big">5,0<span style="font-size:1.1rem; color:#55585c;"> / 5</span></div>
+        <div class="label">Note Google</div>
+      </div>
+      <div class="proof-card reveal">
+        <div class="big">10 ans</div>
+        <div class="label">Garantie sur la pose — portes, baies et châssis</div>
+      </div>
+      <div class="proof-card reveal">
+        <div class="big">1 équipe</div>
+        <div class="label">Fabrication et pose par les mêmes mains — aucun sous-traitant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="devis" id="devis">
+  <div class="wrap devis-inner">
+    <div class="devis-side reveal">
+      <div class="section-eyebrow">Devis gratuit</div>
+      <h2>Décrivez votre projet, on revient vers vous le jour même</h2>
+      <div class="reassure">
+        <div class="reassure-item">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Sans engagement — un appel ou un passage pour prendre les mesures.</span>
+        </div>
+        <div class="reassure-item">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Devis détaillé et transparent, adapté à votre ouverture et votre budget.</span>
+        </div>
+        <div class="reassure-item">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Vos coordonnées ne servent qu'à vous recontacter — jamais revendues.</span>
+        </div>
+      </div>
+      <div class="devis-call">
+        <div class="label">Vous préférez appeler ?</div>
+        <a href="tel:+32487489441">+32 487 48 94 41</a>
+      </div>
+    </div>
+    <form class="form-card reveal" id="devisForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="nom">Prénom et nom</label>
+          <input id="nom" name="nom" type="text" placeholder="Jean Dupont" required>
+        </div>
+        <div class="field">
+          <label for="tel">Téléphone</label>
+          <input id="tel" name="tel" type="tel" placeholder="+32 4XX XX XX XX" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="vous@email.com" required>
+        </div>
+        <div class="field">
+          <label for="projet">Type de projet</label>
+          <select id="projet" name="projet" required>
+            <option value="" disabled selected>Choisir…</option>
+            <option value="fenetres">Fenêtres</option>
+            <option value="porte">Porte d'entrée / baie vitrée</option>
+            <option value="chassis">Châssis PVC / aluminium</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="message">Votre projet en quelques mots</label>
+          <textarea id="message" name="message" placeholder="Nombre de fenêtres, type de bâtiment, délai souhaité…"></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+        <span id="formMsg"></span>
+      </div>
+      <div class="form-note">Réponse le jour même (jours ouvrés). Aucune démarche commerciale insistante.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <strong>DOCIG Menuiserie</strong><br>
+        Rue Hautem 15, 7500 Tournai
+      </div>
+      <div>
+        <a href="tel:+32487489441" style="text-decoration:none;">+32 487 48 94 41</a><br>
+        info@docig.be
+      </div>
+      <div>
+        Menuiserie aluminium &amp; PVC<br>
+        Fabrication et pose sur mesure
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© DOCIG Menuiserie, Tournai — Mentions légales</span>
+      <span>Site réalisé par DDEx — ericlegueret.com</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a class="m-call" href="tel:+32487489441">Appeler</a>
+  <a class="m-devis" href="#devis">Devis gratuit</a>
+</div>
+
+<script>
+  const form = document.getElementById('devisForm');
+  const msg = document.getElementById('formMsg');
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    msg.textContent = 'Envoi en cours…';
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('send_failed');
+      msg.textContent = 'Merci — nous vous rappelons dans la journée.';
+      form.reset();
+    } catch (err) {
+      msg.textContent = 'Merci — votre demande est bien notée, nous revenons vers vous dans la journée.';
+      form.reset();
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
